@@ -1,14 +1,11 @@
 {
-  "name": "untitled",
+  "name": "smart-sut",
   "version": "1.0.0",
-  "description": "",
-  "main": "dist/index.js",
+  "private": true,
+  "description": "Смарт сүт — Collect + база знаний",
   "scripts": {
-    "build": "tsc"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "typescript": "^6.0.3"
-  },
-  "private": true
+    "mobile": "npm --prefix apps/mobile start",
+    "mobile:web": "npm --prefix apps/mobile run web",
+    "mobile:android": "npm --prefix apps/mobile run android"
+  }
 }
