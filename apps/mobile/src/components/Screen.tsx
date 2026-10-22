@@ -9,10 +9,24 @@ type Props = {
   style?: ViewStyle;
 };
 
-export function Screen({ children, scroll = false, style }: Props) {
+type ScreenProps = Props & {
+  /** When a navigation header is already shown, skip top safe-area inset. */
+  withHeader?: boolean;
+};
+
+export function Screen({
+  children,
+  scroll = false,
+  style,
+  withHeader = false,
+}: ScreenProps) {
+  const edges = withHeader
+    ? (['left', 'right'] as const)
+    : (['top', 'left', 'right'] as const);
+
   if (scroll) {
     return (
-      <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
+      <SafeAreaView style={styles.safe} edges={edges}>
         <ScrollView
           contentContainerStyle={[styles.scrollContent, style]}
           keyboardShouldPersistTaps="handled"
@@ -24,7 +38,7 @@ export function Screen({ children, scroll = false, style }: Props) {
   }
 
   return (
-    <SafeAreaView style={styles.safe} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={styles.safe} edges={edges}>
       <View style={[styles.body, style]}>{children}</View>
     </SafeAreaView>
   );

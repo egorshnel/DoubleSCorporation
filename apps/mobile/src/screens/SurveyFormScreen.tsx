@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Alert, Platform, StyleSheet, Text, View } from 'react-native';
 import * as Location from 'expo-location';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { AppButton } from '../components/AppButton';
@@ -39,22 +39,25 @@ export function SurveyFormScreen({ navigation, route }: Props) {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    if (isEdit) {
+    if (isEdit || Platform.OS === 'web') {
+      if (Platform.OS === 'web' && !isEdit) {
+        setGpsStatus('На вебе GPS отключён — координаты точки');
+      }
       return;
     }
 
     let cancelled = false;
 
     (async () => {
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        if (!cancelled) {
-          setGpsStatus('Нет доступа к GPS — используем координаты точки');
-        }
-        return;
-      }
-
       try {
+        const { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+          if (!cancelled) {
+            setGpsStatus('Нет доступа к GPS — используем координаты точки');
+          }
+          return;
+        }
+
         const pos = await Location.getCurrentPositionAsync({
           accuracy: Location.Accuracy.Balanced,
         });
@@ -137,7 +140,7 @@ export function SurveyFormScreen({ navigation, route }: Props) {
   };
 
   return (
-    <Screen scroll>
+    <Screen scroll withHeader>
       <Text style={styles.title}>{isEdit ? 'Изменить визит' : 'Визит'}</Text>
       <Text style={styles.farm}>{farm.name}</Text>
 

@@ -27,21 +27,23 @@ type CollectContextValue = {
 
 const CollectContext = createContext<CollectContextValue | null>(null);
 
-const INITIAL_SURVEYS: Survey[] = [
-  {
-    id: 'survey-seed-1',
-    farmId: 'farm-2',
-    farmName: 'TechHub «Алма»',
-    collectedAt: new Date().toISOString(),
-    volumeLiters: 420,
-    qualityNote: 'Витрина в порядке, без брака',
-    lat: 49.845,
-    lng: 73.142,
-  },
-];
+function createInitialSurveys(): Survey[] {
+  return [
+    {
+      id: 'survey-seed-1',
+      farmId: 'farm-2',
+      farmName: 'TechHub «Алма»',
+      collectedAt: new Date().toISOString(),
+      volumeLiters: 420,
+      qualityNote: 'Витрина в порядке, без брака',
+      lat: 49.845,
+      lng: 73.142,
+    },
+  ];
+}
 
 export function CollectProvider({ children }: { children: ReactNode }) {
-  const [surveys, setSurveys] = useState<Survey[]>(INITIAL_SURVEYS);
+  const [surveys, setSurveys] = useState<Survey[]>(createInitialSurveys);
 
   const addSurvey = useCallback((input: NewSurveyInput) => {
     const survey: Survey = {

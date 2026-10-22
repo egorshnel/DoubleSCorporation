@@ -48,6 +48,10 @@ const HEADER: Record<FarmFilter, { title: string; subtitle: string }> = {
   },
 };
 
+function ListSep() {
+  return <View style={styles.sep} />;
+}
+
 export function FarmsScreen({ navigation }: Props) {
   const [mode, setMode] = useState<Mode>('list');
   const [query, setQuery] = useState('');
@@ -136,17 +140,18 @@ export function FarmsScreen({ navigation }: Props) {
         ) : (
           <FarmsMap
             farms={farms}
-            onSelectFarm={(farmId) =>
-              navigation.navigate('FarmDetail', { farmId })
+            onSelectFarm={(farmId, title) =>
+              navigation.navigate('FarmDetail', { farmId, title })
             }
           />
         )
       ) : (
         <FlatList
+          style={styles.flex}
           data={farms}
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.list}
-          ItemSeparatorComponent={() => <View style={styles.sep} />}
+          ItemSeparatorComponent={ListSep}
           ListEmptyComponent={
             <EmptyState
               title="Ничего не найдено"
@@ -157,7 +162,10 @@ export function FarmsScreen({ navigation }: Props) {
             <FarmListItem
               farm={item}
               onPress={() =>
-                navigation.navigate('FarmDetail', { farmId: item.id })
+                navigation.navigate('FarmDetail', {
+                  farmId: item.id,
+                  title: item.name,
+                })
               }
             />
           )}
@@ -179,6 +187,9 @@ export function FarmsScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   screen: {
     paddingBottom: 0,
+  },
+  flex: {
+    flex: 1,
   },
   title: {
     fontSize: 24,

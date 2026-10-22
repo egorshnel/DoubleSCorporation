@@ -1,6 +1,6 @@
 export type FarmsStackParamList = {
   FarmsHome: undefined;
-  FarmDetail: { farmId: string };
+  FarmDetail: { farmId: string; title: string };
 };
 
 export type CollectTabParamList = {

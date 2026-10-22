@@ -4,7 +4,7 @@ import { FARM_TYPE_LABEL, type Farm } from '../data/types';
 
 type Props = {
   farms: Farm[];
-  onSelectFarm: (farmId: string) => void;
+  onSelectFarm: (farmId: string, title: string) => void;
 };
 
 const REGION = {
@@ -27,7 +27,7 @@ export function FarmsMap({ farms, onSelectFarm }: Props) {
           coordinate={{ latitude: farm.lat, longitude: farm.lng }}
           title={farm.name}
           description={`${FARM_TYPE_LABEL[farm.type]} · ${farm.volumeLitersTypical} шт`}
-          onCalloutPress={() => onSelectFarm(farm.id)}
+          onCalloutPress={() => onSelectFarm(farm.id, farm.name)}
         />
       ))}
     </MapView>

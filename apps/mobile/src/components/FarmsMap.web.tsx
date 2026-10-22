@@ -4,7 +4,7 @@ import { colors } from '../theme';
 
 type Props = {
   farms: Farm[];
-  onSelectFarm: (farmId: string) => void;
+  onSelectFarm: (farmId: string, title: string) => void;
 };
 
 export function FarmsMap(_props: Props) {

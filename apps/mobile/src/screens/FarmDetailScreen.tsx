@@ -35,8 +35,7 @@ export function FarmDetailScreen({ navigation, route }: Props) {
   }
 
   return (
-    <Screen scroll>
-      <Text style={styles.title}>{farm.name}</Text>
+    <Screen scroll withHeader>
       <View style={styles.badgeRow}>
         <FarmTypeBadge type={farm.type} />
         <VolumeBadge liters={farm.volumeLitersTypical} />
@@ -87,16 +86,11 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     marginTop: 24,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: colors.text,
-    marginBottom: 12,
-  },
   badgeRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
+    marginTop: 8,
     marginBottom: 16,
   },
   badgeHint: {

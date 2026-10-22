@@ -1,7 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  type NativeStackHeaderProps,
+} from '@react-navigation/native-stack';
 import { Text } from 'react-native';
+import { AppHeader } from '../components/AppHeader';
 import { FarmsScreen } from '../screens/FarmsScreen';
 import { FarmDetailScreen } from '../screens/FarmDetailScreen';
 import { SurveyFormScreen } from '../screens/SurveyFormScreen';
@@ -17,12 +21,27 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<CollectTabParamList>();
 const FarmsStack = createNativeStackNavigator<FarmsStackParamList>();
 
+function FarmDetailHeader({ navigation, route }: NativeStackHeaderProps) {
+  const params = route.params as FarmsStackParamList['FarmDetail'];
+  return (
+    <AppHeader
+      title={params?.title ?? 'Точка'}
+      onBack={() => navigation.goBack()}
+    />
+  );
+}
+
+function SurveyFormHeader({ navigation, route }: NativeStackHeaderProps) {
+  const params = route.params as RootStackParamList['SurveyForm'];
+  const title = params?.surveyId ? 'Изменить визит' : 'Новый визит';
+  return <AppHeader title={title} onBack={() => navigation.goBack()} />;
+}
+
 function FarmsStackNavigator() {
   return (
     <FarmsStack.Navigator
       screenOptions={{
         headerTintColor: colors.primary,
-        headerTitleStyle: { fontWeight: '600' },
         contentStyle: { backgroundColor: colors.bg },
       }}
     >
@@ -34,7 +53,7 @@ function FarmsStackNavigator() {
       <FarmsStack.Screen
         name="FarmDetail"
         component={FarmDetailScreen}
-        options={{ title: 'Точка' }}
+        options={{ header: FarmDetailHeader }}
       />
     </FarmsStack.Navigator>
   );
@@ -103,7 +122,6 @@ export function CollectNavigator() {
       <RootStack.Navigator
         screenOptions={{
           headerTintColor: colors.primary,
-          headerTitleStyle: { fontWeight: '600' },
           contentStyle: { backgroundColor: colors.bg },
         }}
       >
@@ -115,10 +133,10 @@ export function CollectNavigator() {
         <RootStack.Screen
           name="SurveyForm"
           component={SurveyFormScreen}
-          options={({ route }) => ({
-            title: route.params.surveyId ? 'Изменить визит' : 'Новый визит',
+          options={{
             presentation: 'modal',
-          })}
+            header: SurveyFormHeader,
+          }}
         />
       </RootStack.Navigator>
     </NavigationContainer>
