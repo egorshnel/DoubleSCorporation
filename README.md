@@ -1,10 +1,10 @@
-# DoubleSCorporation — Смарт сүт Collect
+# DoubleSCorporation — Phone Collect
 
-Мобильное и веб-приложение для сбора молока: производители, пункты приёма, полевые опросы.
+Мобильное и веб-приложение для полевых визитов: магазины смартфонов, пункты скупки, учёт устройств.
 
 ## Страница в браузере
 
-После деплоя GitHub Pages:
+После включения GitHub Pages:
 
 **https://egorshnel.github.io/DoubleSCorporation/**
 
@@ -22,5 +22,6 @@ npm start
 ## Структура
 
 ```
-apps/mobile/   # Expo (Collect UI)
+apps/mobile/   # Expo (UI визитов)
+docs/          # веб-превью для GitHub Pages
 ```

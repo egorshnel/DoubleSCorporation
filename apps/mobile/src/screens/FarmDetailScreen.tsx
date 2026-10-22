@@ -29,7 +29,7 @@ export function FarmDetailScreen({ navigation, route }: Props) {
   if (!farm) {
     return (
       <Screen>
-        <Text style={styles.missing}>Хозяйство не найдено</Text>
+        <Text style={styles.missing}>Точка не найдена</Text>
       </Screen>
     );
   }
@@ -40,7 +40,7 @@ export function FarmDetailScreen({ navigation, route }: Props) {
       <View style={styles.badgeRow}>
         <FarmTypeBadge type={farm.type} />
         <VolumeBadge liters={farm.volumeLitersTypical} />
-        <Text style={styles.badgeHint}>типичный объём</Text>
+        <Text style={styles.badgeHint}>типичный остаток</Text>
       </View>
 
       <View style={styles.card}>
@@ -48,11 +48,11 @@ export function FarmDetailScreen({ navigation, route }: Props) {
         <Row label="Контакт" value={farm.contactName} />
         <Row label="Телефон" value={farm.contactPhone} />
         <Row
-          label={farm.type === 'producer' ? 'Коровы' : 'Роль'}
+          label={farm.type === 'producer' ? 'Сотрудники' : 'Роль'}
           value={
             farm.type === 'producer'
               ? String(farm.cowCount)
-              : 'пункт приёма молока'
+              : 'пункт скупки устройств'
           }
         />
         <Row label="Сезонность" value={farm.seasonalityNote} />
@@ -64,7 +64,7 @@ export function FarmDetailScreen({ navigation, route }: Props) {
       </View>
 
       <AppButton
-        label="Провести опрос"
+        label="Зафиксировать визит"
         onPress={() =>
           navigation.navigate('SurveyForm', { farmId: farm.id })
         }

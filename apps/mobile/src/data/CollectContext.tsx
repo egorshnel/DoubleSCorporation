@@ -31,10 +31,10 @@ const INITIAL_SURVEYS: Survey[] = [
   {
     id: 'survey-seed-1',
     farmId: 'farm-2',
-    farmName: 'Кооператив «Ақ сүт»',
+    farmName: 'TechHub «Алма»',
     collectedAt: new Date().toISOString(),
     volumeLiters: 420,
-    qualityNote: 'Температура в норме',
+    qualityNote: 'Витрина в порядке, без брака',
     lat: 49.845,
     lng: 73.142,
   },

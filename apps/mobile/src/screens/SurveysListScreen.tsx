@@ -32,7 +32,7 @@ export function SurveysListScreen({ navigation }: Props) {
   const total = surveys.reduce((sum, s) => sum + s.volumeLiters, 0);
 
   const onDelete = (id: string, farmName: string) => {
-    Alert.alert('Удалить опрос?', `«${farmName}» будет удалён из сборов`, [
+    Alert.alert('Удалить визит?', `«${farmName}» будет удалён из списка`, [
       { text: 'Отмена', style: 'cancel' },
       {
         text: 'Удалить',
@@ -44,12 +44,12 @@ export function SurveysListScreen({ navigation }: Props) {
 
   return (
     <Screen style={styles.screen}>
-      <Text style={styles.title}>Сборы</Text>
-      <Text style={styles.subtitle}>Опросы за сессию (mock, без сервера)</Text>
+      <Text style={styles.title}>Визиты</Text>
+      <Text style={styles.subtitle}>Проверки точек за сессию (mock)</Text>
 
       <View style={styles.totalCard}>
-        <Text style={styles.totalLabel}>Сумма литров</Text>
-        <Text style={styles.totalValue}>{total} л</Text>
+        <Text style={styles.totalLabel}>Всего устройств</Text>
+        <Text style={styles.totalValue}>{total} шт</Text>
       </View>
 
       <FlatList
@@ -59,8 +59,8 @@ export function SurveysListScreen({ navigation }: Props) {
         ItemSeparatorComponent={() => <View style={styles.sep} />}
         ListEmptyComponent={
           <EmptyState
-            title="Пока нет опросов"
-            subtitle="Откройте хозяйство и нажмите «Провести опрос»"
+            title="Пока нет визитов"
+            subtitle="Откройте точку и нажмите «Зафиксировать визит»"
           />
         }
         renderItem={({ item }) => (

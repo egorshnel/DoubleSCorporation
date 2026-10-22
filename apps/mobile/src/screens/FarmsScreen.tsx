@@ -24,27 +24,27 @@ type Mode = 'list' | 'map';
 
 const FILTERS: { key: FarmFilter; label: string }[] = [
   { key: 'all', label: 'Все' },
-  { key: 'producers', label: 'Производители' },
-  { key: 'collectors', label: 'Приёмщики' },
+  { key: 'producers', label: 'Магазины' },
+  { key: 'collectors', label: 'Скупка' },
   { key: 'small', label: 'Мелкие <5' },
 ];
 
 const HEADER: Record<FarmFilter, { title: string; subtitle: string }> = {
   all: {
-    title: 'Поставщики',
-    subtitle: 'Производители молока и пункты приёма',
+    title: 'Точки',
+    subtitle: 'Магазины телефонов и пункты скупки',
   },
   producers: {
-    title: 'Производители',
-    subtitle: 'Хозяйства, которые сдают молоко',
+    title: 'Магазины',
+    subtitle: 'Точки продажи смартфонов',
   },
   collectors: {
-    title: 'Приёмщики',
-    subtitle: 'Пункты приёма и заготовки молока',
+    title: 'Скупка',
+    subtitle: 'Пункты приёма б/у устройств',
   },
   small: {
-    title: 'Мелкие хозяйства',
-    subtitle: 'Производители с менее чем 5 коровами',
+    title: 'Мелкие салоны',
+    subtitle: 'Магазины с менее чем 5 сотрудниками',
   },
 };
 

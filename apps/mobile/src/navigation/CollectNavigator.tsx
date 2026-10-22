@@ -34,7 +34,7 @@ function FarmsStackNavigator() {
       <FarmsStack.Screen
         name="FarmDetail"
         component={FarmDetailScreen}
-        options={{ title: 'Хозяйство' }}
+        options={{ title: 'Точка' }}
       />
     </FarmsStack.Navigator>
   );
@@ -77,9 +77,9 @@ function MainTabs() {
         name="Farms"
         component={FarmsStackNavigator}
         options={{
-          title: 'Поставщики',
+          title: 'Точки',
           tabBarLabel: ({ focused }) => (
-            <TabLabel label="Поставщики" focused={focused} />
+            <TabLabel label="Точки" focused={focused} />
           ),
         }}
       />
@@ -87,9 +87,9 @@ function MainTabs() {
         name="Surveys"
         component={SurveysListScreen}
         options={{
-          title: 'Сборы',
+          title: 'Визиты',
           tabBarLabel: ({ focused }) => (
-            <TabLabel label="Сборы" focused={focused} />
+            <TabLabel label="Визиты" focused={focused} />
           ),
         }}
       />
@@ -116,7 +116,7 @@ export function CollectNavigator() {
           name="SurveyForm"
           component={SurveyFormScreen}
           options={({ route }) => ({
-            title: route.params.surveyId ? 'Изменить опрос' : 'Новый опрос',
+            title: route.params.surveyId ? 'Изменить визит' : 'Новый визит',
             presentation: 'modal',
           })}
         />

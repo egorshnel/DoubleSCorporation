@@ -33,7 +33,7 @@ export function SurveyFormScreen({ navigation, route }: Props) {
   const [lat, setLat] = useState(existing?.lat ?? farm?.lat ?? 0);
   const [lng, setLng] = useState(existing?.lng ?? farm?.lng ?? 0);
   const [gpsStatus, setGpsStatus] = useState(
-    existing ? 'Координаты опроса' : 'Координаты хозяйства',
+    existing ? 'Координаты визита' : 'Координаты точки',
   );
   const [touchedVolume, setTouchedVolume] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -49,7 +49,7 @@ export function SurveyFormScreen({ navigation, route }: Props) {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         if (!cancelled) {
-          setGpsStatus('Нет доступа к GPS — используем координаты хозяйства');
+          setGpsStatus('Нет доступа к GPS — используем координаты точки');
         }
         return;
       }
@@ -65,7 +65,7 @@ export function SurveyFormScreen({ navigation, route }: Props) {
         }
       } catch {
         if (!cancelled) {
-          setGpsStatus('GPS недоступен — координаты хозяйства');
+          setGpsStatus('GPS недоступен — координаты точки');
         }
       }
     })();
@@ -83,7 +83,7 @@ export function SurveyFormScreen({ navigation, route }: Props) {
   if (!farm) {
     return (
       <Screen>
-        <Text style={styles.missing}>Хозяйство не найдено</Text>
+        <Text style={styles.missing}>Точка не найдена</Text>
       </Screen>
     );
   }
@@ -91,7 +91,7 @@ export function SurveyFormScreen({ navigation, route }: Props) {
   if (surveyId && !existing) {
     return (
       <Screen>
-        <Text style={styles.missing}>Опрос не найден</Text>
+        <Text style={styles.missing}>Визит не найден</Text>
         <View style={styles.gap} />
         <AppButton label="Назад" variant="secondary" onPress={() => navigation.goBack()} />
       </Screen>
@@ -116,7 +116,7 @@ export function SurveyFormScreen({ navigation, route }: Props) {
         lng,
       });
       setSaving(false);
-      Alert.alert('Сохранено', 'Опрос обновлён', [
+      Alert.alert('Сохранено', 'Визит обновлён', [
         { text: 'OK', onPress: () => navigation.goBack() },
       ]);
       return;
@@ -131,19 +131,19 @@ export function SurveyFormScreen({ navigation, route }: Props) {
       lng,
     });
     setSaving(false);
-    Alert.alert('Сохранено', 'Опрос добавлен в сборы', [
+    Alert.alert('Сохранено', 'Визит добавлен в список', [
       { text: 'OK', onPress: () => navigation.goBack() },
     ]);
   };
 
   return (
     <Screen scroll>
-      <Text style={styles.title}>{isEdit ? 'Изменить опрос' : 'Опрос'}</Text>
+      <Text style={styles.title}>{isEdit ? 'Изменить визит' : 'Визит'}</Text>
       <Text style={styles.farm}>{farm.name}</Text>
 
       <View style={styles.form}>
         <AppInput
-          label="Объём сегодня, л"
+          label="Устройств на точке, шт"
           value={volume}
           onChangeText={(text) => {
             setVolume(text);
@@ -154,10 +154,10 @@ export function SurveyFormScreen({ navigation, route }: Props) {
           error={volumeError}
         />
         <AppInput
-          label="Заметка о качестве"
+          label="Заметка о состоянии"
           value={qualityNote}
           onChangeText={setQualityNote}
-          placeholder="температура, запах, замечания"
+          placeholder="витрина, брак, комплектация"
           multiline
           style={styles.note}
         />
@@ -171,7 +171,7 @@ export function SurveyFormScreen({ navigation, route }: Props) {
       </View>
 
       <AppButton
-        label={isEdit ? 'Сохранить изменения' : 'Сохранить опрос'}
+        label={isEdit ? 'Сохранить изменения' : 'Сохранить визит'}
         onPress={onSave}
         disabled={!canSave}
       />

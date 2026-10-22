@@ -15,8 +15,8 @@ export type Farm = {
 };
 
 export const FARM_TYPE_LABEL: Record<FarmType, string> = {
-  producer: 'Производитель',
-  collector: 'Приёмщик',
+  producer: 'Магазин',
+  collector: 'Скупка',
 };
 
 export type Survey = {
