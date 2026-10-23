@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Phone Collect",
-    "slug": "phone-collect",
+    "name": "Смарт сүт",
+    "slug": "smart-sut",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -9,7 +9,7 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "GPS нужен, чтобы фиксировать точку визита в поле."
+        "NSLocationWhenInUseUsageDescription": "GPS нужен, чтобы фиксировать точку опроса молока в поле."
       }
     },
     "android": {
@@ -37,7 +37,7 @@
       [
         "expo-location",
         {
-          "locationWhenInUsePermission": "GPS нужен, чтобы фиксировать точку визита в поле."
+          "locationWhenInUsePermission": "GPS нужен, чтобы фиксировать точку опроса молока в поле."
         }
       ]
     ]

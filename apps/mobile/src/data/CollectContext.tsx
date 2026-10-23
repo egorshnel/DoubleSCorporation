@@ -32,10 +32,10 @@ function createInitialSurveys(): Survey[] {
     {
       id: 'survey-seed-1',
       farmId: 'farm-2',
-      farmName: 'TechHub «Алма»',
+      farmName: 'Кооператив «Ақ сүт»',
       collectedAt: new Date().toISOString(),
       volumeLiters: 420,
-      qualityNote: 'Витрина в порядке, без брака',
+      qualityNote: 'Температура в норме',
       lat: 49.845,
       lng: 73.142,
     },

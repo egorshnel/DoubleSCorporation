@@ -5,7 +5,7 @@ export type VolumeParseResult =
 export function parseVolumeLiters(raw: string): VolumeParseResult {
   const trimmed = raw.trim().replace(',', '.');
   if (!trimmed) {
-    return { ok: false, error: 'Укажите количество устройств' };
+    return { ok: false, error: 'Укажите объём молока' };
   }
   const liters = Number(trimmed);
   if (!Number.isFinite(liters)) {

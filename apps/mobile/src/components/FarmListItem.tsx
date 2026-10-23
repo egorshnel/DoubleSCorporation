@@ -12,7 +12,7 @@ type Props = {
 export function FarmListItem({ farm, onPress }: Props) {
   const meta =
     farm.type === 'producer'
-      ? `${farm.cowCount} сотр. · ${farm.contactName}`
+      ? `${farm.cowCount} коров · ${farm.contactName}`
       : farm.contactName;
 
   return (

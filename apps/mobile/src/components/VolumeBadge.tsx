@@ -8,7 +8,7 @@ type Props = {
 export function VolumeBadge({ liters }: Props) {
   return (
     <View style={styles.badge}>
-      <Text style={styles.text}>{liters} шт</Text>
+      <Text style={styles.text}>{liters} л</Text>
     </View>
   );
 }

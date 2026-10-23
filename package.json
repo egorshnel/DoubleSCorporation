@@ -2,7 +2,7 @@
   "name": "smart-sut",
   "version": "1.0.0",
   "private": true,
-  "description": "Phone Collect — магазины и скупка устройств",
+  "description": "Смарт сүт — производитель, оптовик, переработчик",
   "scripts": {
     "mobile": "npm --prefix apps/mobile start",
     "mobile:web": "npm --prefix apps/mobile run web",

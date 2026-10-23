@@ -9,16 +9,16 @@ import { VolumeBadge } from '../components/VolumeBadge';
 import { getFarmById } from '../data/mockFarms';
 import { FARM_TYPE_LABEL } from '../data/types';
 import type {
-  CollectTabParamList,
   FarmsStackParamList,
   RootStackParamList,
+  WholesalerTabParamList,
 } from '../navigation/types';
 import { colors } from '../theme';
 
 type Props = CompositeScreenProps<
   NativeStackScreenProps<FarmsStackParamList, 'FarmDetail'>,
   CompositeScreenProps<
-    BottomTabScreenProps<CollectTabParamList>,
+    BottomTabScreenProps<WholesalerTabParamList>,
     NativeStackScreenProps<RootStackParamList>
   >
 >;
@@ -29,7 +29,7 @@ export function FarmDetailScreen({ navigation, route }: Props) {
   if (!farm) {
     return (
       <Screen>
-        <Text style={styles.missing}>Точка не найдена</Text>
+        <Text style={styles.missing}>Хозяйство не найдено</Text>
       </Screen>
     );
   }
@@ -39,7 +39,7 @@ export function FarmDetailScreen({ navigation, route }: Props) {
       <View style={styles.badgeRow}>
         <FarmTypeBadge type={farm.type} />
         <VolumeBadge liters={farm.volumeLitersTypical} />
-        <Text style={styles.badgeHint}>типичный остаток</Text>
+        <Text style={styles.badgeHint}>типичный объём</Text>
       </View>
 
       <View style={styles.card}>
@@ -47,11 +47,11 @@ export function FarmDetailScreen({ navigation, route }: Props) {
         <Row label="Контакт" value={farm.contactName} />
         <Row label="Телефон" value={farm.contactPhone} />
         <Row
-          label={farm.type === 'producer' ? 'Сотрудники' : 'Роль'}
+          label={farm.type === 'producer' ? 'Коровы' : 'Роль'}
           value={
             farm.type === 'producer'
               ? String(farm.cowCount)
-              : 'пункт скупки устройств'
+              : 'пункт приёма молока'
           }
         />
         <Row label="Сезонность" value={farm.seasonalityNote} />
@@ -63,7 +63,7 @@ export function FarmDetailScreen({ navigation, route }: Props) {
       </View>
 
       <AppButton
-        label="Зафиксировать визит"
+        label="Провести опрос"
         onPress={() =>
           navigation.navigate('SurveyForm', { farmId: farm.id })
         }

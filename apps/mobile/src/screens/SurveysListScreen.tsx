@@ -7,13 +7,13 @@ import { Screen } from '../components/Screen';
 import { VolumeBadge } from '../components/VolumeBadge';
 import { useCollect } from '../data/CollectContext';
 import type {
-  CollectTabParamList,
   RootStackParamList,
+  WholesalerTabParamList,
 } from '../navigation/types';
 import { colors } from '../theme';
 
 type Props = CompositeScreenProps<
-  BottomTabScreenProps<CollectTabParamList, 'Surveys'>,
+  BottomTabScreenProps<WholesalerTabParamList, 'Visits'>,
   NativeStackScreenProps<RootStackParamList>
 >;
 
@@ -32,7 +32,7 @@ export function SurveysListScreen({ navigation }: Props) {
   const total = surveys.reduce((sum, s) => sum + s.volumeLiters, 0);
 
   const onDelete = (id: string, farmName: string) => {
-    Alert.alert('Удалить визит?', `«${farmName}» будет удалён из списка`, [
+    Alert.alert('Удалить опрос?', `«${farmName}» будет удалён из сборов`, [
       { text: 'Отмена', style: 'cancel' },
       {
         text: 'Удалить',
@@ -44,12 +44,12 @@ export function SurveysListScreen({ navigation }: Props) {
 
   return (
     <Screen style={styles.screen}>
-      <Text style={styles.title}>Визиты</Text>
-      <Text style={styles.subtitle}>Проверки точек за сессию (mock)</Text>
+      <Text style={styles.title}>Сборы</Text>
+      <Text style={styles.subtitle}>Опросы за сессию (mock)</Text>
 
       <View style={styles.totalCard}>
-        <Text style={styles.totalLabel}>Всего устройств</Text>
-        <Text style={styles.totalValue}>{total} шт</Text>
+        <Text style={styles.totalLabel}>Сумма литров</Text>
+        <Text style={styles.totalValue}>{total} л</Text>
       </View>
 
       <FlatList
@@ -59,8 +59,8 @@ export function SurveysListScreen({ navigation }: Props) {
         ItemSeparatorComponent={() => <View style={styles.sep} />}
         ListEmptyComponent={
           <EmptyState
-            title="Пока нет визитов"
-            subtitle="Откройте точку и нажмите «Зафиксировать визит»"
+            title="Пока нет опросов"
+            subtitle="Откройте хозяйство и нажмите «Провести опрос»"
           />
         }
         renderItem={({ item }) => (
@@ -107,14 +107,8 @@ export function SurveysListScreen({ navigation }: Props) {
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    paddingBottom: 0,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: colors.text,
-  },
+  screen: { paddingBottom: 0 },
+  title: { fontSize: 24, fontWeight: '700', color: colors.text },
   subtitle: {
     marginTop: 4,
     marginBottom: 12,
@@ -138,13 +132,8 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '700',
   },
-  list: {
-    paddingBottom: 24,
-    flexGrow: 1,
-  },
-  sep: {
-    height: 10,
-  },
+  list: { paddingBottom: 24, flexGrow: 1 },
+  sep: { height: 10 },
   card: {
     backgroundColor: colors.surface,
     borderRadius: 12,
@@ -165,41 +154,21 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: colors.text,
   },
-  meta: {
-    fontSize: 13,
-    color: colors.textMuted,
-  },
-  note: {
-    fontSize: 14,
-    color: colors.text,
-  },
+  meta: { fontSize: 13, color: colors.textMuted },
+  note: { fontSize: 14, color: colors.text },
   gps: {
     fontSize: 12,
     color: colors.textMuted,
     fontVariant: ['tabular-nums'],
   },
-  actions: {
-    flexDirection: 'row',
-    gap: 8,
-    marginTop: 8,
-  },
+  actions: { flexDirection: 'row', gap: 8, marginTop: 8 },
   actionBtn: {
     paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 8,
     backgroundColor: colors.bg,
   },
-  actionPressed: {
-    opacity: 0.7,
-  },
-  actionEdit: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: colors.primary,
-  },
-  actionDelete: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: colors.danger,
-  },
+  actionPressed: { opacity: 0.7 },
+  actionEdit: { fontSize: 14, fontWeight: '600', color: colors.primary },
+  actionDelete: { fontSize: 14, fontWeight: '600', color: colors.danger },
 });
